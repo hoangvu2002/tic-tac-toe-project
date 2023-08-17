@@ -22,6 +22,10 @@ gameBoard = (function() {
         }
     }
 
+    const printBoard = () => {
+        const boardWithCellValues = board.map((row) => row.map((cell) => cell.getValue()))
+        console.log(boardWithCellValues);
+    }
     return {getBoard, availableCell}
 })();
 
@@ -52,11 +56,21 @@ const displayController = (function() {
     const players = [
         {
             name: playerOneName,
-            value: 1,
+            value: "X",
         },
         {
             name: playerTwoName,
-            value: 2,
+            value: "O",
         }
-    ]
+    ];
+
+    let activePlayer = players[0];
+
+    const switchActivePlayer = () => {
+        activePlayer = activePlayer === players[0] ? players[1] : players[0];
+    };
+
+    const getActivePlayer = () => activePlayer;
+
+
 })()
