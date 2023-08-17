@@ -46,5 +46,17 @@ function player(playerName, playerValue) {
 }
 
 const displayController = (function() {
-    
+    const playerOneName = "Player one";
+    const playerTwoName = "Player two";
+
+    const players = [
+        {
+            name: playerOneName,
+            value: 1,
+        },
+        {
+            name: playerTwoName,
+            value: 2,
+        }
+    ]
 })()
