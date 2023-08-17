@@ -22,6 +22,7 @@ gameBoard = (function() {
         }
     }
 
+    return {getBoard, availableCell}
 })();
 
 function cell() {
@@ -39,3 +40,11 @@ function cell() {
 
     return {fill, getValue}
 }
+
+function player(playerName, playerValue) {
+    return {playerName, playerValue}
+}
+
+const displayController = (function() {
+    
+})()
