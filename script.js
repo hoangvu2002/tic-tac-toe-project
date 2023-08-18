@@ -30,18 +30,30 @@ gameBoard = (function() {
         return matrix.map(row => row[colIndex]);
     };
 
-    const checkWinner = (displayController.getActivePlayer().value) => {
+    function checkWinner(value) {
         for (let i=0; i<rows; i++) {
-            if (board[i].every((cell) => cell.getValue()===displayController.getActivePlayer().value)) {
+            if (board[i].every((cell) => cell.getValue()===value)) {
                 console.log(`${displayController.getActivePlayer().name} is the winner`);
                 resetGame();
             } 
         }
+
         for (let j=0; j<columns; j++) {
-            if (getColumn(board,j).every((cell) => cell.getValue()===displayController.getActivePlayer().value)) {
+            if (getColumn(board,j).every((cell) => cell.getValue()===value)) {
                 console.log(`${displayController.getActivePlayer().name} is the winner`);
                 resetGame();
             }
+        }
+
+        const firstDiagonal = [];
+        const secondDiagonal = [];
+        for (let i=0; i<rows; i++) {
+            firstDiagonal.push(board[i][i].getValue());
+            secondDiagonal.push(board[i][2-i].getValue());
+        }
+        if ((firstDiagonal.every((cell) => cell.getValue()===value))||(secondDiagonal.every((cell) => cell.getValue()===value))) {
+            console.log(`${displayController.getActivePlayer().name} is the winner`);
+            resetGame();
         }
     }
 
