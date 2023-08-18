@@ -26,6 +26,20 @@ gameBoard = (function() {
             return false;}
     }
 
+    const getColumn = (matrix, colIndex) => {
+        return matrix.map(row => row[colIndex]);
+    };
+
+    const checkWinner = (displayController.getActivePlayer().value) => {
+        for (let i=0; i<rows; i++) {
+            if (board[i].every((cell) => cell.getValue()===displayController.getActivePlayer().value)) {
+                console.log(`${displayController.getActivePlayer().name} is the winner`);
+                resetGame();
+            } 
+        }
+
+    }
+
     const printBoard = () => {
         const boardWithCellValues = board.map((row) => row.map((cell) => cell.getValue()))
         console.log(boardWithCellValues);
