@@ -30,7 +30,15 @@ gameBoard = (function() {
         return matrix.map(row => row[colIndex]);
     };
 
-    function checkWinner(value) {
+    const resetGame = () => {
+        for (let i=0; i<rows; i++) {
+            for (let j=0; j<columns; j++) {
+                board[i][j] = cell();
+            }
+        }
+    }
+
+    const checkWinner = (value) => {
         for (let i=0; i<rows; i++) {
             if (board[i].every((cell) => cell.getValue()===value)) {
                 console.log(`${displayController.getActivePlayer().name} is the winner`);
