@@ -59,7 +59,7 @@ gameBoard = (function() {
             firstDiagonal.push(board[i][i].getValue());
             secondDiagonal.push(board[i][2-i].getValue());
         }
-        if ((firstDiagonal.every((cell) => cell.getValue()===value))||(secondDiagonal.every((cell) => cell.getValue()===value))) {
+        if ((firstDiagonal.every((cell) => cell===value))||(secondDiagonal.every((cell) => cell===value))) {
             console.log(`${displayController.getActivePlayer().name} is the winner`);
             resetGame();
         }
@@ -69,7 +69,7 @@ gameBoard = (function() {
         const boardWithCellValues = board.map((row) => row.map((cell) => cell.getValue()))
         console.log(boardWithCellValues);
     }
-    return {getBoard, availableCell, printBoard}
+    return {getBoard, availableCell, printBoard, checkWinner}
 })();
 
 function cell() {
@@ -126,6 +126,7 @@ const displayController = (function() {
         
         if (gameBoard.availableCell(gameBoard.getBoard(),row, column)) {
             gameBoard.getBoard()[row][column].fill(row, column, activePlayer.value);
+            gameBoard.checkWinner(activePlayer.value);
         } else return;
 
         switchActivePlayer();
