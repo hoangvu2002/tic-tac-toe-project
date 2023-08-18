@@ -13,7 +13,7 @@ gameBoard = (function() {
     const availableCell = (board, row, column) => {
         for (let i=0; i<rows; i++) {
             for (let j=0; j<columns; j++) {
-                if (board[i][j] === 0) {
+                if (board[i][j].getValue() === 0) {
                     return true;
                 } else {
                     return false
@@ -74,6 +74,20 @@ const displayController = (function() {
 
     const printNewRound = () => {
         console.log(`${activePlayer.name}'s turn`);
-        gameBoard.printBoard()
+        gameBoard.printBoard();
     }
-})()
+
+    const playRound = (row, column) => {
+        console.log(`${activePlayer.name} is ticking.`);
+        mark = activePlayer.value;
+        
+        if (gameBoard.availableCell(gameBoard.getBoard(),row, column)) {
+            gameBoard.getBoard()[row][column].fill(row, column, activePlayer.value);
+        } else return;
+
+        switchActivePlayer();
+        gameBoard.printBoard();
+    }
+
+    return {playRound, getActivePlayer, switchActivePlayer}
+})();
