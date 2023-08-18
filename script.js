@@ -11,15 +11,19 @@ gameBoard = (function() {
     const getBoard = () => board;
 
     const availableCell = (board, row, column) => {
-        for (let i=0; i<rows; i++) {
-            for (let j=0; j<columns; j++) {
-                if (board[i][j].getValue() === 0) {
-                    return true;
-                } else {
-                    return false
-                }
-            }
-        }
+        //for (let i=0; i<rows; i++) {
+        //    for (let j=0; j<columns; j++) {
+        //        if (board[i][j].getValue() === 0) {
+        //            return true;
+        //        } else {
+        //            return false
+        //        }
+        //    }
+        //}
+        if (board[row][column].getValue() === 0) {
+            return true;
+        } else {
+            return false;}
     }
 
     const printBoard = () => {
