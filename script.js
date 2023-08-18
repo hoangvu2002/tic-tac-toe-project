@@ -37,7 +37,12 @@ gameBoard = (function() {
                 resetGame();
             } 
         }
-
+        for (let j=0; j<columns; j++) {
+            if (getColumn(board,j).every((cell) => cell.getValue()===displayController.getActivePlayer().value)) {
+                console.log(`${displayController.getActivePlayer().name} is the winner`);
+                resetGame();
+            }
+        }
     }
 
     const printBoard = () => {
