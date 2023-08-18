@@ -135,3 +135,10 @@ const displayController = (function() {
 
     return {playRound, getActivePlayer, switchActivePlayer}
 })();
+
+const cells = document.querySelectorAll(".cell");
+cells.forEach((cell) => {
+    cell.onclick = () => {
+        displayController.playRound(Number(cell.dataset.row),Number(cell.dataset.column));
+    }
+});
