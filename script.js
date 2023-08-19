@@ -36,6 +36,12 @@ gameBoard = (function() {
                 board[i][j] = cell();
             }
         }
+
+        //Add setTimeOut function for removing the winner notificationg
+        setTimeout(() => {
+            const conclusion = document.querySelector('.conclusion');
+            conclusion.textContent = "";
+        }, 3000)
     }
 
     const checkWinner = (value) => {
@@ -155,9 +161,12 @@ const displayController = (function() {
 const cells = document.querySelectorAll(".cell");
 cells.forEach((cell) => {    
     cell.onclick = () => {
-        cell.setAttribute('data-value',displayController.getActivePlayer().value)
-        displayController.playRound(Number(cell.dataset.row),Number(cell.dataset.column));
-        updateMark(cell);
+        if (!cell.hasAttribute('data-value')) {
+            cell.setAttribute('data-value',displayController.getActivePlayer().value)
+            displayController.playRound(Number(cell.dataset.row),Number(cell.dataset.column));
+            updateMark(cell);
+        };
+        
     }
 });
 
@@ -173,8 +182,8 @@ const updateMark = (cell) => {
             oMark.src = "pngimg.com - letter_o_PNG116.png";
             cell.appendChild(oMark);
         }
-        else {
-            cell.removeChild(cell.firstChild)
-        }
+        //else {
+        //    cell.removeChild(cell.firstChild)
+        //}
     //})
 }
