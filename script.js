@@ -121,7 +121,7 @@ gameBoard = (function() {
         const boardWithCellValues = board.map((row) => row.map((cell) => cell.getValue()))
         console.log(boardWithCellValues);
     }
-    return {getBoard, availableCell, printBoard, checkWinner}
+    return {getBoard, availableCell, printBoard, checkWinner, resetGame}
 })();
 
 function cell() {
@@ -218,3 +218,11 @@ const updateMark = (cell) => {
         //}
     //})
 }
+
+const resetButton = document.createElement('button');
+const body = document.querySelector("body");
+body.appendChild(resetButton);
+resetButton.textContent = "Reset game";
+resetButton.addEventListener('click', () => {
+    gameBoard.resetGame();
+})
