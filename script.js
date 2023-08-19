@@ -54,7 +54,11 @@ gameBoard = (function() {
         const cells = document.querySelectorAll('.cell');
         cells.forEach((cell) => {
             cell.removeAttribute('data-value');
-        })
+        });
+
+        //Make the display board clickable again
+        const displayBoard = document.querySelector('.board');
+        displayBoard.style.pointerEvents = 'auto';
     }
 
     const checkWinner = (value) => {
