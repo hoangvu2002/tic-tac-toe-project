@@ -39,9 +39,11 @@ gameBoard = (function() {
     }
 
     const checkWinner = (value) => {
+        const conclusion = document.querySelector('.conclusion');
         for (let i=0; i<rows; i++) {
             if (board[i].every((cell) => cell.getValue()===value)) {
                 console.log(`${displayController.getActivePlayer().name} is the winner`);
+                conclusion.textContent = `${displayController.getActivePlayer().name} is the winner`;
                 resetGame();
             } 
         }
@@ -49,6 +51,7 @@ gameBoard = (function() {
         for (let j=0; j<columns; j++) {
             if (getColumn(board,j).every((cell) => cell.getValue()===value)) {
                 console.log(`${displayController.getActivePlayer().name} is the winner`);
+                conclusion.textContent = `${displayController.getActivePlayer().name} is the winner`;
                 resetGame();
             }
         }
@@ -61,6 +64,7 @@ gameBoard = (function() {
         }
         if ((firstDiagonal.every((cell) => cell===value))||(secondDiagonal.every((cell) => cell===value))) {
             console.log(`${displayController.getActivePlayer().name} is the winner`);
+            conclusion.textContent = `${displayController.getActivePlayer().name} is the winner`;
             resetGame();
         }
         //Add logic for the draw case
@@ -72,6 +76,7 @@ gameBoard = (function() {
         }
         if (allCells.every((cell) => cell !== 0)) {
             console.log("Draw");
+            conclusion.textContent = `Draw`;
             resetGame();
         }
     }
