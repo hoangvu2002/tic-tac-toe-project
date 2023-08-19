@@ -42,6 +42,11 @@ gameBoard = (function() {
             const conclusion = document.querySelector('.conclusion');
             conclusion.textContent = "";
         }, 3000)
+
+        //Remove all the marks from the cell
+        cells.forEach((cell) => {
+            cell.removeChild(cell.firstChild);
+        })
     }
 
     const checkWinner = (value) => {
@@ -163,8 +168,9 @@ cells.forEach((cell) => {
     cell.onclick = () => {
         if (!cell.hasAttribute('data-value')) {
             cell.setAttribute('data-value',displayController.getActivePlayer().value)
-            displayController.playRound(Number(cell.dataset.row),Number(cell.dataset.column));
             updateMark(cell);
+            displayController.playRound(Number(cell.dataset.row),Number(cell.dataset.column));
+            
         };
         
     }
