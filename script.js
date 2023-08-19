@@ -63,6 +63,17 @@ gameBoard = (function() {
             console.log(`${displayController.getActivePlayer().name} is the winner`);
             resetGame();
         }
+        //Add logic for the draw case
+        const allCells = [];
+        for (let i=0; i<rows; i++) {
+            for (let j=0; j<columns; j++) {
+                allCells.push(board[i][j].getValue());
+            }
+        }
+        if (allCells.every((cell) => cell !== 0)) {
+            console.log("Draw");
+            resetGame();
+        }
     }
 
     const printBoard = () => {
@@ -137,8 +148,28 @@ const displayController = (function() {
 })();
 
 const cells = document.querySelectorAll(".cell");
-cells.forEach((cell) => {
+cells.forEach((cell) => {    
     cell.onclick = () => {
+        cell.setAttribute('data-value',displayController.getActivePlayer().value)
         displayController.playRound(Number(cell.dataset.row),Number(cell.dataset.column));
+        updateMark(cell);
     }
 });
+
+const updateMark = (cell) => {
+    //cells.forEach((cell) => {
+        if (cell.dataset.value === "X") {
+            const xMark = document.createElement('img');
+            xMark.src = "kisspng-x-mark-symbol-computer-icons-clip-art-w-5aea1368bab3e2.5041694515252898327647.png";
+            cell.appendChild(xMark);
+        }
+        else if (cell.dataset.value === "O") {
+            const oMark = document.createElement("img");
+            oMark.src = "pngimg.com - letter_o_PNG116.png";
+            cell.appendChild(oMark);
+        }
+        else {
+            cell.removeChild(cell.firstChild)
+        }
+    //})
+}
