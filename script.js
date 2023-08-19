@@ -37,25 +37,37 @@ gameBoard = (function() {
             }
         }
 
-        //Add setTimeOut function for removing the winner notificationg
-        setTimeout(() => {
-            const conclusion = document.querySelector('.conclusion');
-            conclusion.textContent = "";
-        }, 3000)
+        //removing the winner notificationg
+        
+        const conclusion = document.querySelector('.conclusion');
+        conclusion.textContent = "";
+        
 
         //Remove all the marks from the cell
+        const marks = document.querySelectorAll('img')
+        marks.forEach((mark) => {
+            //cell.removeChild(cell.firstChild);
+            //cell.removeAttribute('data-value');
+            mark.remove();
+        });
+
+        const cells = document.querySelectorAll('.cell');
         cells.forEach((cell) => {
-            cell.removeChild(cell.firstChild);
+            cell.removeAttribute('data-value');
         })
     }
 
     const checkWinner = (value) => {
         const conclusion = document.querySelector('.conclusion');
+        const displayBoard = document.querySelector('.board');
         for (let i=0; i<rows; i++) {
             if (board[i].every((cell) => cell.getValue()===value)) {
                 console.log(`${displayController.getActivePlayer().name} is the winner`);
                 conclusion.textContent = `${displayController.getActivePlayer().name} is the winner`;
-                resetGame();
+                displayBoard.style.pointerEvents = "none";
+                setTimeout(() => {
+                    resetGame();
+                }, 3000);
             } 
         }
 
@@ -63,7 +75,10 @@ gameBoard = (function() {
             if (getColumn(board,j).every((cell) => cell.getValue()===value)) {
                 console.log(`${displayController.getActivePlayer().name} is the winner`);
                 conclusion.textContent = `${displayController.getActivePlayer().name} is the winner`;
-                resetGame();
+                displayBoard.style.pointerEvents = "none";
+                setTimeout(() => {
+                    resetGame();
+                }, 3000)
             }
         }
 
@@ -76,7 +91,10 @@ gameBoard = (function() {
         if ((firstDiagonal.every((cell) => cell===value))||(secondDiagonal.every((cell) => cell===value))) {
             console.log(`${displayController.getActivePlayer().name} is the winner`);
             conclusion.textContent = `${displayController.getActivePlayer().name} is the winner`;
-            resetGame();
+            displayBoard.style.pointerEvents = "none";
+            setTimeout(() => {
+                resetGame();
+            }, 3000)
         }
         //Add logic for the draw case
         const allCells = [];
@@ -88,7 +106,10 @@ gameBoard = (function() {
         if (allCells.every((cell) => cell !== 0)) {
             console.log("Draw");
             conclusion.textContent = `Draw`;
-            resetGame();
+            displayBoard.style.pointerEvents = "none";
+            setTimeout(() => {
+                resetGame();
+            }, 3000)
         }
     }
 
